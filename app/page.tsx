@@ -1,11 +1,11 @@
-import { ModeToggle } from "@/components/shared/mode-toggle";
 import Navbar from "@/components/layout/Navbar";
+import { Hero } from "@/components/layout/Hero";
 
 export default function Home() {
   return (
-    <>
-      {/* <ModeToggle /> */}
+    <main className="min-h-screen bg-black">
       <Navbar />
-    </>
+      <Hero />
+    </main>
   );
 }
