@@ -5,8 +5,8 @@ import { Button } from "../ui/button";
 export function Hero() {
   return (
     <>
-      <div className="h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden pt-20">
-        <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
+      <div className="h-screen w-full bg-background dark:bg-black flex flex-col items-center justify-center overflow-hidden pt-20">
+        <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-foreground dark:text-white relative z-20">
           XiCON
         </h1>
         <div className="w-[40rem] h-40 relative">
@@ -27,7 +27,7 @@ export function Hero() {
           />
 
           {/* Radial Gradient to prevent sharp edges */}
-          <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+          <div className="absolute inset-0 w-full h-full bg-background dark:bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
         </div>
         <div className="flex gap-5 z-20">
           <Button size="sm" className="mt-20 text-xs px-4 py-1.5 h-8">

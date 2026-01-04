@@ -4,7 +4,7 @@ import { HeroScroll } from "@/components/layout/Scroll";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background dark:bg-black">
       <Navbar />
       <Hero />
       <div className="-mt-60">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu as MenuIcon } from "lucide-react";
@@ -9,14 +9,48 @@ import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Menu from "./Menu";
 import { navLinks } from "@/lib/constants";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div className="fixed w-full z-50">
+        <div className="border-[1.3px] rounded-full mx-3 my-1.5 shadow-lg backdrop-blur-md bg-background/60">
+          <div className="flex h-10 justify-between py-2 items-center flex-nowrap px-3 gap-2">
+            <div className="items-center flex gap-1 shrink-0">
+              <Link href="/">
+                <Image src="/logo.png" alt="logo" width={24} height={24} />
+              </Link>
+              <Link href="/">
+                <h1 className="text-sm font-bold">SSOKOBAN</h1>
+              </Link>
+            </div>
+            <div className="hidden md:flex mx-2 gap-2 items-center shrink-0">
+              <div className="w-20 h-6" /> {/* Placeholder for buttons */}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed w-full z-50">
-      <div className="border rounded-full mx-3 my-1.5 shadow-lg backdrop-blur-md bg-background/60">
-        <div className="flex h-8 justify-between py-1 items-center flex-nowrap px-2 gap-2">
+      <div className="border-[1.3px] rounded-full mx-3 my-1.5 shadow-lg backdrop-blur-md bg-background/60">
+        <div className="flex h-10 justify-between py-2 items-center flex-nowrap px-3 gap-2">
           <div className="items-center flex gap-1 shrink-0">
             <Link href="/">
               <Image src="/logo.png" alt="logo" width={24} height={24} />
@@ -60,18 +94,27 @@ const Navbar = () => {
                     ))}
                   </div>
                   <div className="flex flex-col gap-1.5 mt-2 mx-3">
-                    <Button
-                      size="sm"
-                      className="rounded-full text-[0.7rem] h-7 px-6"
-                    >
-                      Sign In
-                    </Button>
-                    <Button
-                      size="sm"
-                      className="rounded-full text-[0.7rem] h-7 px-6"
-                    >
-                      Sign Up
-                    </Button>
+                    <SignedOut>
+                      <Button
+                        asChild
+                        size="sm"
+                        className="rounded-full text-[0.7rem] h-7 px-6"
+                      >
+                        <SignInButton />
+                      </Button>
+                      <Button
+                        asChild
+                        size="sm"
+                        className="rounded-full text-[0.7rem] h-7 px-6"
+                      >
+                        <SignUpButton />
+                      </Button>
+                    </SignedOut>
+                    <SignedIn>
+                      <div className="flex justify-center py-2">
+                        <UserButton />
+                      </div>
+                    </SignedIn>
                   </div>
                 </div>
               </SheetContent>
@@ -79,16 +122,23 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Right Side */}
-          <div className="hidden sm:flex mx-2 gap-0.5 items-center shrink-0">
-            <Button size="sm" className="rounded-full text-xs h-6 px-3">
-              Sign In
-            </Button>
-            <Button size="sm" className="rounded-full text-xs h-6 px-3">
-              Sign Up
-            </Button>
-            <div className="scale-75">
-              <ModeToggle />
-            </div>
+          <div className="hidden md:flex mx-2 gap-2 items-center shrink-0">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button size="sm" className="rounded-full text-xs h-6 px-3">
+                  Sign In
+                </Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button size="sm" className="rounded-full text-xs h-6 px-3">
+                  Sign Up
+                </Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <ModeToggle />
           </div>
         </div>
       </div>
