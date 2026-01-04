@@ -2,12 +2,10 @@
 import React from "react";
 import { SparklesCore } from "../ui/sparkles";
 import { Button } from "../ui/button";
-import { MacbookScroll } from "../ui/macbook-scroll";
-
 export function Hero() {
   return (
     <>
-      <div className="min-h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden pt-20">
+      <div className="h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden pt-20">
         <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
           XiCON
         </h1>
@@ -40,7 +38,6 @@ export function Hero() {
           </Button>
         </div>
       </div>
-      <MacbookScroll />
     </>
   );
 }

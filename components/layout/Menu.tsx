@@ -117,16 +117,17 @@ const Menu = () => {
 
         {Object.entries(navLinks).map(([key, link]) => (
           <NavigationMenuItem key={key}>
-            <Link href={link.href} legacyBehavior passHref>
-              <NavigationMenuLink
+            <NavigationMenuLink asChild>
+              <Link
+                href={link.href}
                 className={cn(
                   navigationMenuTriggerStyle(),
                   "h-6 rounded-full text-xs px-3 font-bold inline-flex items-center justify-center",
                 )}
               >
                 {link.title}
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
